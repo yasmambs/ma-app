@@ -2,7 +2,8 @@
   --hijau-tua: #0f3d2e;
   --emerald: #1f7a5c;
   --gold: #d4af37;
-  --white-soft: #f8f9fa;
+  --white: #ffffff;
+  --gray-soft: #f4f6f8;
   --navy-soft: #1c2b36;
 }
 
@@ -14,80 +15,69 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background: var(--white-soft);
-  color: #333;
+  background: var(--white);
+  color: #2c2c2c;
+  line-height: 1.6;
 }
 
 h1, h2 {
   font-family: 'Poppins', sans-serif;
 }
 
+/* NAVBAR */
 .navbar {
-  background: var(--hijau-tua);
-  color: white;
+  background: var(--white);
+  border-bottom: 1px solid #e5e5e5;
   display: flex;
   justify-content: space-between;
-  padding: 15px 40px;
   align-items: center;
+  padding: 18px 60px;
+}
+
+.logo {
+  font-weight: 700;
+  color: var(--hijau-tua);
+  font-size: 20px;
 }
 
 .navbar nav a {
-  color: white;
   text-decoration: none;
-  margin-left: 20px;
+  margin-left: 25px;
+  color: #333;
   font-weight: 500;
+  transition: 0.3s;
 }
 
 .navbar nav a:hover {
-  color: var(--gold);
+  color: var(--emerald);
 }
 
 .btn-gold {
   background: var(--gold);
-  padding: 8px 15px;
-  border-radius: 5px;
-  color: black !important;
+  padding: 8px 18px;
+  border-radius: 6px;
+  color: #000 !important;
+  font-weight: 600;
 }
 
+/* HERO */
 .hero {
-  height: 85vh;
-  background: linear-gradient(rgba(15,61,46,0.7), rgba(15,61,46,0.7)),
-              url('https://images.unsplash.com/photo-1588072432836-e10032774350') center/cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  padding: 120px 20px;
   text-align: center;
+  background: var(--gray-soft);
 }
 
 .hero h1 {
-  font-size: 40px;
+  font-size: 42px;
   margin-bottom: 15px;
+  color: var(--hijau-tua);
+}
+
+.hero p {
+  margin-bottom: 25px;
+  color: #555;
 }
 
 .btn-primary {
   background: var(--emerald);
-  padding: 12px 25px;
-  border-radius: 5px;
-  color: white;
-  text-decoration: none;
-  margin-top: 15px;
-  display: inline-block;
-}
-
-.section {
-  padding: 60px 40px;
-  text-align: center;
-}
-
-.section.alt {
-  background: #eef3f2;
-}
-
-footer {
-  background: var(--navy-soft);
-  color: white;
-  text-align: center;
-  padding: 20px;
-}
+  padding: 12px 28px;
