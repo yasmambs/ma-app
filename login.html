@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Portal Madrasah</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<style>
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--green-dark), var(--navy-soft));
+}
+
+.login-card {
+  background: #fff;
+  padding: 40px;
+  width: 380px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.login-card p {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="login-card">
+  <h2>Portal Madrasah</h2>
+  <p>Login Admin / User</p>
+
+  <div class="input-group">
+    <input type="email" id="email" placeholder="Email">
+  </div>
+
+  <div class="input-group">
+    <input type="password" id="password" placeholder="Password">
+  </div>
+
+  <button class="btn btn-primary" style="width:100%;">Login</button>
+</div>
+
+</body>
+</html>
