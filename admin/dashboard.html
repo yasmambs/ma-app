@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Admin - Portal Madrasah</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Global CSS -->
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<style>
+.main-content {
+  margin-left: 260px;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  border-left: 5px solid var(--gold-soft);
+}
+
+.top-section {
+  margin-bottom: 24px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar" id="sidebar">
+  <h3>Madrasah</h3>
+
+  <a href="dashboard.html" class="active">Dashboard</a>
+  <a href="siswa.html">Data Siswa</a>
+  <a href="guru.html">Data Guru</a>
+  <a href="spmb.html">SPMB 2026/2027</a>
+  <a href="artikel.html">Artikel</a>
+  <a href="galeri.html">Galeri</a>
+  <a href="users.html">User & Role</a>
+  <a href="settings.html">Pengaturan</a>
+  <a href="#">Logout</a>
+</div>
+
+<!-- ================= NAVBAR ================= -->
+<div class="navbar">
+  <div>
+    <button class="btn btn-outline" onclick="toggleSidebar()">☰</button>
+  </div>
+  <div>
+    <strong>Admin Panel</strong>
+  </div>
+</div>
+
+<!-- ================= MAIN CONTENT ================= -->
+<div class="main-content">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    Dashboard / Overview
+  </div>
+
+  <!-- Title -->
+  <div class="top-section">
+    <h1>Dashboard</h1>
+    <p>Ringkasan statistik Portal Madrasah & SPMB 2026/2027</p>
+  </div>
+
+  <!-- Statistic Cards -->
+  <div class="dashboard-grid">
+    
+    <div class="card stat-card">
+      <h3>Total Siswa</h3>
+      <h2>120</h2>
+      <p>Data aktif</p>
+    </div>
+
+    <div class="card stat-card">
+      <h3>Total Guru</h3>
+      <h2>25</h2>
+      <p>Pengajar aktif</p>
+    </div>
+
+    <div class="card stat-card">
+      <h3>Pendaftar SPMB</h3>
+      <h2>80</h2>
+      <p>Tahun 2026/2027</p>
+    </div>
+
+    <div class="card stat-card">
+      <h3>Diterima</h3>
+      <h2>50</h2>
+      <p>Status Accepted</p>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+<div class="footer">
+  © 2026 Portal Madrasah - Sistem Terintegrasi SPMB 2026/2027
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
