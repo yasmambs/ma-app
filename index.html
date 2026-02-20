@@ -4,107 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SPMB 2026-2027 - Sistem Penerimaan Murid Baru</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
         <div class="container">
-            <div class="nav-brand">
-                <img src="assets/images/logo.png" alt="Logo" class="logo">
+            <a href="#" class="nav-brand">
+                <div class="logo">🎓</div>
                 <span>SPMB 2026-2027</span>
-            </div>
-            <div class="nav-menu" id="navMenu">
-    <a href="#informasi">Informasi</a>
-    <a href="#jadwal">Jadwal</a>
-    <a href="#jalur">Jalur</a>
-    <a href="pages/pengumuman.html">Pengumuman</a>
-    <a href="pages/siswa/daftar.html" class="btn btn-primary">Daftar</a>
-    <a href="pages/login.html" class="btn btn-outline">Login</a>
-</div>
-
-            <button class="nav-toggle" id="navToggle">
+            </a>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
+            
+            <div class="nav-menu" id="navMenu">
+                <a href="#informasi">Informasi</a>
+                <a href="#jadwal">Jadwal</a>
+                <a href="#jalur">Jalur</a>
+                <a href="#pengumuman">Pengumuman</a>
+                <a href="pages/siswa/daftar.html" class="btn btn-primary">Daftar</a>
+                <a href="pages/login.html" class="btn btn-outline">Login</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
+    <!-- HERO -->
+    <section class="hero">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        
         <div class="container">
             <div class="hero-content">
+                <div class="hero-badge">
+                    <span>📅</span>
+                    <span>Pendaftaran Dibuka 15 Juni 2026</span>
+                </div>
+                
                 <h1>Penerimaan Murid Baru</h1>
-                <h2>Tahun Pelajaran 2026-2027</h2>
-                <p class="hero-subtitle">Sistem pendaftaran online untuk SD, SMP, dan SMA sederhana, transparan, dan akuntabel</p>
+                <p class="hero-subtitle">Tahun Pelajaran 2026-2027. Sistem pendaftaran online untuk SD, SMP, dan SMA sederhana, transparan, dan akuntabel.</p>
                 
                 <div class="countdown" id="countdown">
                     <div class="countdown-item">
-                        <span class="number" id="days">00</span>
-                        <span class="label">Hari</span>
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Hari</span>
                     </div>
                     <div class="countdown-item">
-                        <span class="number" id="hours">00</span>
-                        <span class="label">Jam</span>
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Jam</span>
                     </div>
                     <div class="countdown-item">
-                        <span class="number" id="minutes">00</span>
-                        <span class="label">Menit</span>
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Menit</span>
                     </div>
                     <div class="countdown-item">
-                        <span class="number" id="seconds">00</span>
-                        <span class="label">Detik</span>
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Detik</span>
                     </div>
                 </div>
-
+                
                 <div class="hero-cta">
-                    <a href="pages/siswa/daftar.html" class="btn btn-large btn-primary">Daftar Sekarang</a>
-                    <a href="#panduan" class="btn btn-large btn-outline">Lihat Panduan</a>
+                    <a href="pages/siswa/daftar.html" class="btn btn-primary btn-lg">
+                        <span>🚀</span>
+                        <span>Daftar Sekarang</span>
+                    </a>
+                    <a href="#informasi" class="btn btn-white btn-lg">
+                        <span>ℹ️</span>
+                        <span>Pelajari Dulu</span>
+                    </a>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="illustration">
-                    <!-- CSS Illustration -->
-                    <div class="student-card">
-                        <div class="card-header"></div>
-                        <div class="card-photo"></div>
-                        <div class="card-info">
-                            <div class="line"></div>
-                            <div class="line short"></div>
-                        </div>
+            
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="hero-card-header"></div>
+                    <div class="hero-card-avatar"></div>
+                    <div class="hero-card-body">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Informasi Section -->
-    <section id="informasi" class="section">
+    <!-- INFORMASI -->
+    <section class="section" id="informasi">
         <div class="container">
-            <h2 class="section-title">Informasi Penting</h2>
+            <div class="section-header">
+                <span class="section-label">Informasi Penting</span>
+                <h2 class="section-title">Jadwal Pelaksanaan</h2>
+                <p class="section-subtitle">Catat tanggal-tanggal penting berikut untuk kesuksesan pendaftaran Anda</p>
+            </div>
+            
             <div class="info-grid">
                 <div class="info-card">
-                    <div class="icon">📅</div>
+                    <div class="info-icon">📅</div>
                     <h3>Pendaftaran</h3>
                     <p>15 Juni - 15 Juli 2026</p>
                     <span class="badge badge-online">Online</span>
                 </div>
                 <div class="info-card">
-                    <div class="icon">📝</div>
+                    <div class="info-icon">📝</div>
                     <h3>Verifikasi</h3>
                     <p>16 - 20 Juli 2026</p>
                     <span class="badge badge-process">Proses</span>
                 </div>
                 <div class="info-card">
-                    <div class="icon">📢</div>
+                    <div class="info-icon">📢</div>
                     <h3>Pengumuman</h3>
                     <p>25 Juli 2026</p>
                     <span class="badge badge-announce">Online</span>
                 </div>
                 <div class="info-card">
-                    <div class="icon">✅</div>
+                    <div class="info-icon">✅</div>
                     <h3>Daftar Ulang</h3>
                     <p>26 - 30 Juli 2026</p>
                     <span class="badge badge-offline">Offline</span>
@@ -113,29 +136,35 @@
         </div>
     </section>
 
-    <!-- Jalur Section -->
-    <section id="jalur" class="section section-gray">
+    <!-- JALUR -->
+    <section class="section section-alt" id="jalur">
         <div class="container">
-            <h2 class="section-title">Jalur Pendaftaran</h2>
+            <div class="section-header">
+                <span class="section-label">Jalur Masuk</span>
+                <h2 class="section-title">Pilihan Jalur Pendaftaran</h2>
+                <p class="section-subtitle">Pilih jalur yang sesuai dengan kondisi dan prestasi Anda</p>
+            </div>
+            
             <div class="jalur-grid">
                 <div class="jalur-card">
                     <div class="jalur-header zona">
                         <h3>Zonasi</h3>
-                        <span class="kuota">Kuota: 60%</span>
+                        <span class="jalur-kuota">60%</span>
                     </div>
                     <div class="jalur-body">
                         <ul>
-                            <li>Berdasarkan jarak domisili</li>
-                            <li>Minimal 1 tahun tinggal</li>
-                            <li>Usia sesuai ketentuan</li>
+                            <li>Berdasarkan jarak domisili ke sekolah</li>
+                            <li>Minimal 1 tahun tinggal di zona</li>
+                            <li>Usia sesuai ketentuan per jenjang</li>
                         </ul>
-                        <a href="#" class="btn btn-small">Detail</a>
+                        <a href="#" class="btn btn-primary btn-full">Detail Zonasi</a>
                     </div>
                 </div>
+                
                 <div class="jalur-card">
                     <div class="jalur-header prestasi">
                         <h3>Prestasi</h3>
-                        <span class="kuota">Kuota: 30%</span>
+                        <span class="jalur-kuota">30%</span>
                     </div>
                     <div class="jalur-body">
                         <ul>
@@ -143,13 +172,14 @@
                             <li>Sertifikat 2 tahun terakhir</li>
                             <li>Minimal juara 3 tingkat kabupaten</li>
                         </ul>
-                        <a href="#" class="btn btn-small">Detail</a>
+                        <a href="#" class="btn btn-secondary btn-full" style="--btn-bg: linear-gradient(135deg, #7c3aed, #a855f7);">Detail Prestasi</a>
                     </div>
                 </div>
+                
                 <div class="jalur-card">
                     <div class="jalur-header afirmasi">
                         <h3>Afirmasi</h3>
-                        <span class="kuota">Kuota: 10%</span>
+                        <span class="jalur-kuota">10%</span>
                     </div>
                     <div class="jalur-body">
                         <ul>
@@ -157,53 +187,73 @@
                             <li>Surat keterangan dari desa/kelurahan</li>
                             <li>Prioritas untuk daerah terpencil</li>
                         </ul>
-                        <a href="#" class="btn btn-small">Detail</a>
+                        <a href="#" class="btn btn-secondary btn-full" style="--btn-bg: linear-gradient(135deg, #059669, #10b981);">Detail Afirmasi</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Statistik -->
+    <!-- STATS -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title">Statistik Pendaftaran</h2>
+            <div class="section-header">
+                <span class="section-label">Statistik</span>
+                <h2 class="section-title">Data Pendaftaran Real-time</h2>
+            </div>
+            
             <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number" id="totalPendaftar">0</span>
-                    <span class="stat-label">Total Pendaftar</span>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="1250">0</div>
+                    <div class="stat-label">Total Pendaftar</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="totalSekolah">0</span>
-                    <span class="stat-label">Sekolah Tersedia</span>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="45">0</div>
+                    <div class="stat-label">Sekolah Tersedia</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-number" id="kuotaTersedia">0</span>
-                    <span class="stat-label">Kuota Tersedia</span>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="3500">0</div>
+                    <div class="stat-label">Kuota Tersedia</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" data-target="98" data-suffix="%">0</div>
+                    <div class="stat-label">Tingkat Kepuasan</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3>SPMB 2026-2027</h3>
-                    <p>Sistem Penerimaan Murid Baru Dinas Pendidikan</p>
+                    <h3>🎓 SPMB 2026-2027</h3>
+                    <p>Sistem Penerimaan Murid Baru Dinas Pendidikan. Melayani dengan transparan dan akuntabel.</p>
                 </div>
-                <div class="footer-links">
-                    <h4>Bantuan</h4>
-                    <a href="#">Panduan Pendaftaran</a>
-                    <a href="#">FAQ</a>
-                    <a href="#">Kontak Kami</a>
+                <div>
+                    <h4 class="footer-title">Bantuan</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Panduan Pendaftaran</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Kontak Kami</a></li>
+                    </ul>
                 </div>
-                <div class="footer-contact">
-                    <h4>Kontak</h4>
-                    <p>📞 Call Center: 1500-XXX</p>
-                    <p>📧 Email: spmb@dikbud.go.id</p>
-                    <p>🕐 Senin-Jumat: 08.00-16.00</p>
+                <div>
+                    <h4 class="footer-title">Informasi</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Jadwal</a></li>
+                        <li><a href="#">Jalur Pendaftaran</a></li>
+                        <li><a href="#">Pengumuman</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Kontak</h4>
+                    <ul class="footer-links">
+                        <li>📞 1500-XXX</li>
+                        <li>📧 spmb@dikbud.go.id</li>
+                        <li>🕐 Senin-Jumat 08.00-16.00</li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -212,6 +262,12 @@
         </div>
     </footer>
 
-    <script src="assets/js/app.js"></script>
+    <!-- THEME TOGGLE -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-icon" id="themeIcon">🌙</span>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
