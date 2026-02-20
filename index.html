@@ -33,52 +33,72 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Penerimaan Murid Baru</h1>
-                <h2>Tahun Pelajaran 2026-2027</h2>
-                <p class="hero-subtitle">Sistem pendaftaran online untuk SD, SMP, dan SMA sederhana, transparan, dan akuntabel</p>
-                
-                <div class="countdown" id="countdown">
-                    <div class="countdown-item">
-                        <span class="number" id="days">00</span>
-                        <span class="label">Hari</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="number" id="hours">00</span>
-                        <span class="label">Jam</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="number" id="minutes">00</span>
-                        <span class="label">Menit</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="number" id="seconds">00</span>
-                        <span class="label">Detik</span>
-                    </div>
+    <!-- Hero dengan GSAP animation classes -->
+<section class="hero">
+    <!-- Animated shapes -->
+    <div class="hero-shape hero-shape-1"></div>
+    <div class="hero-shape hero-shape-2"></div>
+    <div class="hero-shape hero-shape-3"></div>
+    
+    <div class="container">
+        <div class="hero-content">
+            <!-- Logo dengan animasi -->
+            <div class="hero-logo" style="font-size: 4rem; margin-bottom: 1.5rem;">🎓</div>
+            
+            <!-- Title dengan word-by-word animation -->
+            <h1 class="hero-title">
+                <span class="hero-title-word">Penerimaan</span>
+                <span class="hero-title-word">Murid</span>
+                <span class="hero-title-word">Baru</span>
+            </h1>
+            
+            <h2 class="hero-subtitle">Tahun Pelajaran 2026-2027</h2>
+            
+            <!-- Countdown dengan flip animation -->
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Hari</span>
                 </div>
-
-                <div class="hero-cta">
-                    <a href="pages/siswa/daftar.html" class="btn btn-large btn-primary">Daftar Sekarang</a>
-                    <a href="#panduan" class="btn btn-large btn-outline">Lihat Panduan</a>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Jam</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Menit</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Detik</span>
                 </div>
             </div>
-            <div class="hero-image">
-                <div class="illustration">
-                    <!-- CSS Illustration -->
-                    <div class="student-card">
-                        <div class="card-header"></div>
-                        <div class="card-photo"></div>
-                        <div class="card-info">
-                            <div class="line"></div>
-                            <div class="line short"></div>
-                        </div>
-                    </div>
+            
+            <!-- CTA dengan magnetic effect -->
+            <div class="hero-cta">
+                <a href="pages/siswa/daftar.html" class="btn btn-primary btn-magnetic btn-lg">
+                    🚀 Daftar Sekarang
+                </a>
+                <a href="#informasi" class="btn btn-white btn-magnetic btn-lg">
+                    ℹ️ Pelajari Dulu
+                </a>
+            </div>
+        </div>
+        
+        <!-- 3D Card dengan tilt effect -->
+        <div class="hero-visual">
+            <div class="card-3d" style="width: 100%; max-width: 400px;">
+                <div style="height: 120px; background: linear-gradient(135deg, var(--primary), var(--primary-light));"></div>
+                <div style="padding: 2rem; text-align: center;">
+                    <div style="width: 100px; height: 100px; background: var(--bg-tertiary); border-radius: 50%; margin: -70px auto 1rem; border: 4px solid var(--card-bg);"></div>
+                    <div style="height: 16px; background: var(--bg-tertiary); border-radius: 8px; margin-bottom: 0.5rem;"></div>
+                    <div style="height: 16px; background: var(--bg-tertiary); border-radius: 8px; width: 60%; margin: 0 auto;"></div>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</section>
+
 
     <!-- Informasi Section -->
     <section id="informasi" class="section">
@@ -211,6 +231,12 @@
             </div>
         </div>
     </footer>
+<!-- Di akhir body, urutan penting: -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script src="assets/js/theme-manager.js"></script>
+<script src="assets/js/animations.js"></script>
 
     <script src="assets/js/app.js"></script>
 </body>
