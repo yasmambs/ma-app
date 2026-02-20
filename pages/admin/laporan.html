@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan - SPMB 2026-2027</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        /* Copy style dari dashboard */
+        .admin-layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+        .sidebar { background: var(--gray-900); color: white; padding: 1.5rem; position: fixed; height: 100vh; width: 260px; }
+        .main-content { margin-left: 260px; padding: 2rem; background: var(--gray-100); min-height: 100vh; }
+        
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .report-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+        }
+        
+        .report-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: var(--gray-600);
+        }
+        
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .chart-label {
+            width: 100px;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+        
+        .chart-progress {
+            flex: 1;
+            height: 24px;
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin: 0 0.75rem;
+        }
+        
+        .chart-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: var(--radius);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 0.5rem;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .chart-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            min-width: 40px;
+            text-align: right;
+        }
+        
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .filter-group select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius);
+            background: white;
+        }
+        
+        .action-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span style="font-size: 1.5rem;">🎓</span>
+                <h2>Admin SPMB</h2>
+            </div>
+            <div class="nav-section">
+                <div class="nav-section-title">Menu Utama</div>
+                <a href="dashboard.html" class="nav-item"><span>📊</span> Dashboard</a>
+                <a href="verifikasi.html" class="nav-item"><span>📝</span> Verifikasi</a>
+                <a href="pengumuman.html" class="nav-item"><span>📢</span> Pengumuman</a>
+                <a href="laporan.html" class="nav-item active"><span>📄</span> Laporan</a>
+            </div>
+            <div class="nav-section">
+                <a href="#" class="nav-item" onclick="Auth.logout()"><span>🔒</span> Logout</a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-bar">
+                <h1>Laporan & Statistik</h1>
+                <div class="user-menu">
+                    <span class="user-name">Admin</span>
+                </div>
+            </div>
+
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label>Jenjang:</label>
+                    <select id="filterJenjang" onchange="updateLaporan()">
+                        <option value="">Semua</option>
+                        <option value="SD">SD</option>
+                        <option value="SMP">SMP</option>
+                        <option value="SMA">SMA</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Jalur:</label>
+                    <select id="filterJalur" onchange="updateLaporan()">
+                        <option value="">Semua</option>
+                        <option value="zonasi">Zonasi</option>
+                        <option value="prestasi">Prestasi</option>
+                        <option value="afirmasi">Afirmasi</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Status:</label>
+                    <select id="filterStatus" onchange="updateLaporan()">
+                        <option value="">Semua</option>
+                        <option value="Menunggu Verifikasi">Menunggu Verifikasi</option>
+                        <option value="Terverifikasi">Terverifikasi</option>
+                        <option value="Ditolak">Ditolak</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="btn btn-primary" onclick="ExportModule.exportPendaftar(getFilters())">
+                    <span>📊</span> Export Data Pendaftar
+                </button>
+                <button class="btn btn-outline" onclick="ExportModule.exportLaporan()">
+                    <span>📈</span> Export Laporan Ringkasan
+                </button>
+                <button class="btn btn-outline" onclick="window.print()">
+                    <span>🖨️</span> Cetak Laporan
+                </button>
+            </div>
+
+            <div class="report-grid">
+                <div class="report-card">
+                    <h3>Statistik Berdasarkan Jalur</h3>
+                    <div id="chartJalur"></div>
+                </div>
+                
+                <div class="report-card">
+                    <h3>Statistik Berdasarkan Status</h3>
+                    <div id="chartStatus"></div>
+                </div>
+                
+                <div class="report-card">
+                    <h3>Statistik Berdasarkan Jenjang</h3>
+                    <div id="chartJenjang"></div>
+                </div>
+                
+                <div class="report-card">
+                    <h3>10 Pendaftar Terbaru</h3>
+                    <div id="listTerbaru" style="font-size: 0.875rem;"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Detail Data Pendaftar</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tabelLaporan">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>No. Daftar</th>
+                                    <th>Nama</th>
+                                    <th>Jenjang</th>
+                                    <th>Jalur</th>
+                                    <th>Status</th>
+                                    <th>Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../../assets/js/app.js"></script>
+    <script src="../../assets/js/auth.js"></script>
+    <script src="../../assets/js/export.js"></script>
+    <script>
+        protectAdminPage();
+        
+        function getFilters() {
+            return {
+                jenjang: document.getElementById('filterJenjang').value,
+                jalur: document.getElementById('filterJalur').value,
+                status: document.getElementById('filterStatus').value
+            };
+        }
+        
+        function updateLaporan() {
+            const filters = getFilters();
+            const allData = JSON.parse(localStorage.getItem('spmb_pendaftar') || '[]');
+            
+            // Filter data
+            let filtered = allData;
+            if (filters.jenjang) filtered = filtered.filter(p => p.jenjang === filters.jenjang);
+            if (filters.jalur) filtered = filtered.filter(p => p.jalur === filters.jalur);
+            if (filters.status) filtered = filtered.filter(p => p.status === filters.status);
+            
+            // Update charts
+            renderChart('chartJalur', groupBy(filtered, 'jalur'));
+            renderChart('chartStatus', groupBy(filtered, 'status'));
+            renderChart('chartJenjang', groupBy(filtered, 'jenjang'));
+            
+            // Update list terbaru
+            const terbaru = filtered.slice(-10).reverse();
+            document.getElementById('listTerbaru').innerHTML = terbaru.map((p, i) => `
+                <div style="padding: 0.5rem 0; border-bottom: 1px solid var(--gray-100);">
+                    <strong>${i+1}. ${p.namaLengkap}</strong>
+                    <div style="color: var(--gray-500); font-size: 0.75rem;">
+                        ${p.noDaftar} • ${p.jenjang} • ${new Date(p.tanggalDaftar).toLocaleDateString('id-ID')}
+                    </div>
+                </div>
+            `).join('');
+            
+            // Update tabel
+            const tbody = document.querySelector('#tabelLaporan tbody');
+            tbody.innerHTML = filtered.map((p, i) => `
+                <tr>
+                    <td>${i+1}</td>
+                    <td><strong>${p.noDaftar}</strong></td>
+                    <td>${p.namaLengkap}</td>
+                    <td>${p.jenjang}</td>
+                    <td><span class="badge">${p.jalur}</span></td>
+                    <td><span class="status-badge status-${getStatusClass(p.status)}">${p.status}</span></td>
+                    <td>${new Date(p.tanggalDaftar).toLocaleDateString('id-ID')}</td>
+                </tr>
+            `).join('');
+        }
+        
+        function groupBy(data, key) {
+            return data.reduce((acc, item) => {
+                const val = item[key] || 'Tidak diketahui';
+                acc[val] = (acc[val] || 0) + 1;
+                return acc;
+            }, {});
+        }
+        
+        function renderChart(elementId, data) {
+            const container = document.getElementById(elementId);
+            const total = Object.values(data).reduce((a, b) => a + b, 0);
+            
+            container.innerHTML = Object.entries(data).map(([label, value]) => {
+                const percentage = ((value / total) * 100).toFixed(1);
+                return `
+                    <div class="chart-bar">
+                        <div class="chart-label">${label}</div>
+                        <div class="chart-progress">
+                            <div class="chart-fill" style="width: ${percentage}%">${percentage}%</div>
+                        </div>
+                        <div class="chart-value">${value}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function getStatusClass(status) {
+            if (status === 'Menunggu Verifikasi') return 'pending';
+            if (status === 'Terverifikasi') return 'verified';
+            if (status === 'Ditolak') return 'rejected';
+            return 'pending';
+        }
+        
+        // Initial load
+        updateLaporan();
+    </script>
+</body>
+</html>
