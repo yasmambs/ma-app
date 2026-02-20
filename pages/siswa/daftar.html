@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pendaftaran - SPMB 2026-2027</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .form-page {
+            padding-top: 6rem;
+            min-height: 100vh;
+            background: var(--gray-100);
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+        
+        .form-header {
+            background: linear-gradient(135deg, var(--primary), #8b5cf6);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .form-header h1 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem;
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .progress-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: var(--gray-300);
+            z-index: 0;
+        }
+        
+        .progress-step:last-child::after {
+            display: none;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--gray-300);
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .progress-step.active .step-number,
+        .progress-step.completed .step-number {
+            background: var(--primary);
+        }
+        
+        .step-label {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+        
+        .form-body {
+            padding: 2rem;
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--gray-800);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .file-upload {
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: var(--gray-50);
+        }
+        
+        .file-upload input {
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span>SPMB 2026-2027</span>
+            </div>
+            <div class="nav-menu">
+                <a href="../../index.html">Beranda</a>
+                <a href="login.html">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="form-page">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h1>Formulir Pendaftaran</h1>
+                    <p>Isi data dengan lengkap dan benar</p>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Data Diri</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Data Orang Tua</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Pilihan Sekolah</span>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <span class="step-number">4</span>
+                        <span class="step-label">Upload Dokumen</span>
+                    </div>
+                </div>
+                
+                <form id="pendaftaranForm" class="form-body">
+                    <!-- Step 1: Data Diri -->
+                    <div class="form-step active" id="step1">
+                        <h3>Data Diri Calon Siswa</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="namaLengkap">Nama Lengkap *</label>
+                                <input type="text" id="namaLengkap" name="namaLengkap" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="namaPanggilan">Nama Panggilan</label>
+                                <input type="text" id="namaPanggilan" name="namaPanggilan">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nik">NIK *</label>
+                                <input type="text" id="nik" name="nik" maxlength="16" pattern="\d{16}" required>
+                                <small>16 digit nomor KTP</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="nisn">NISN (jika ada)</label>
+                                <input type="text" id="nisn" name="nisn" maxlength="10">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tempatLahir">Tempat Lahir *</label>
+                                <input type="text" id="tempatLahir" name="tempatLahir" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="tanggalLahir">Tanggal Lahir *</label>
+                                <input type="date" id="tanggalLahir" name="tanggalLahir" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jenisKelamin">Jenis Kelamin *</label>
+                                <select id="jenisKelamin" name="jenisKelamin" required>
+                                    <option value="">Pilih</option>
+                                    <option value="L">Laki-laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="agama">Agama *</label>
+                                <select id="agama" name="agama" required>
+                                    <option value="">Pilih</option>
+                                    <option value="Islam">Islam</option>
+                                    <option value="Kristen">Kristen</option>
+                                    <option value="Katolik">Katolik</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Buddha">Buddha</option>
+                                    <option value="Konghucu">Konghucu</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="alamat">Alamat Lengkap *</label>
+                            <textarea id="alamat" name="alamat" rows="3" required></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Data Orang Tua -->
+                    <div class="form-step" id="step2">
+                        <h3>Data Orang Tua/Wali</h3>
+                        
+                        <h4>Ayah</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="namaAyah">Nama Ayah *</label>
+                                <input type="text" id="namaAyah" name="namaAyah" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pekerjaanAyah">Pekerjaan</label>
+                                <input type="text" id="pekerjaanAyah" name="pekerjaanAyah">
+                            </div>
+                        </div>
+                        
+                        <h4>Ibu</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="namaIbu">Nama Ibu *</label>
+                                <input type="text" id="namaIbu" name="namaIbu" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pekerjaanIbu">Pekerjaan</label>
+                                <input type="text" id="pekerjaanIbu" name="pekerjaanIbu">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="noHp">No. HP/WA *</label>
+                            <input type="tel" id="noHp" name="noHp" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Pilihan Sekolah -->
+                    <div class="form-step" id="step3">
+                        <h3>Pilihan Sekolah</h3>
+                        
+                        <div class="form-group">
+                            <label for="jenjang">Jenjang Pendidikan *</label>
+                            <select id="jenjang" name="jenjang" required>
+                                <option value="">Pilih Jenjang</option>
+                                <option value="SD">SD (Kelas 1)</option>
+                                <option value="SMP">SMP (Kelas 7)</option>
+                                <option value="SMA">SMA (Kelas 10)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="jalur">Jalur Pendaftaran *</label>
+                            <select id="jalur" name="jalur" required>
+                                <option value="">Pilih Jalur</option>
+                                <option value="zonasi">Zonasi</option>
+                                <option value="prestasi">Prestasi</option>
+                                <option value="afirmasi">Afirmasi</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sekolahPilihan1">Sekolah Pilihan 1 *</label>
+                            <select id="sekolahPilihan1" name="sekolahPilihan1" required>
+                                <option value="">Pilih Sekolah</option>
+                                <!-- Populate via JS -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="sekolahPilihan2">Sekolah Pilihan 2</label>
+                            <select id="sekolahPilihan2" name="sekolahPilihan2">
+                                <option value="">Pilih Sekolah</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4: Upload Dokumen -->
+                    <div class="form-step" id="step4">
+                        <h3>Upload Dokumen</h3>
+                        
+                        <div class="form-group">
+                            <label>Foto Diri (3x4) *</label>
+                            <div class="file-upload" onclick="document.getElementById('foto').click()">
+                                <input type="file" id="foto" name="foto" accept="image/*" required>
+                                <div class="upload-icon">📷</div>
+                                <p>Klik untuk upload foto</p>
+                                <small>Format: JPG/PNG, Max 2MB</small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Scan Akte Kelahiran *</label>
+                            <div class="file-upload" onclick="document.getElementById('akte').click()">
+                                <input type="file" id="akte" name="akte" accept=".pdf,.jpg,.png" required>
+                                <div class="upload-icon">📄</div>
+                                <p>Klik untuk upload akte</p>
+                                <small>Format: PDF/JPG/PNG, Max 2MB</small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Scan Kartu Keluarga *</label>
+                            <div class="file-upload" onclick="document.getElementById('kk').click()">
+                                <input type="file" id="kk" name="kk" accept=".pdf,.jpg,.png" required>
+                                <div class="upload-icon">📋</div>
+                                <p>Klik untuk upload KK</p>
+                                <small>Format: PDF/JPG/PNG, Max 2MB</small>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="setuju" name="setuju" required>
+                                Saya menyatakan data yang diisi adalah benar dan siap menerima sanksi jika terdapat kecurangan
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-outline" id="prevBtn" style="display: none;">Sebelumnya</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn">Selanjutnya</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">Kirim Pendaftaran</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../assets/js/app.js"></script>
+    <script>
+        // Form Step Navigation
+        let currentStep = 1;
+        const totalSteps = 4;
+        
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.add('active');
+            
+            // Update progress bar
+            document.querySelectorAll('.progress-step').forEach((s, index) => {
+                s.classList.remove('active', 'completed');
+                if (index + 1 < step) s.classList.add('completed');
+                if (index + 1 === step) s.classList.add('active');
+            });
+            
+            // Update buttons
+            document.getElementById('prevBtn').style.display = step === 1 ? 'none' : 'inline-flex';
+            document.getElementById('nextBtn').style.display = step === totalSteps ? 'none' : 'inline-flex';
+            document.getElementById('submitBtn').style.display = step === totalSteps ? 'inline-flex' : 'none';
+        }
+        
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (validateStep(currentStep)) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        });
+        
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentStep--;
+            showStep(currentStep);
+        });
+        
+        function validateStep(step) {
+            const currentStepEl = document.getElementById(`step${step}`);
+            const inputs = currentStepEl.querySelectorAll('input[required], select[required], textarea[required]');
+            
+            let valid = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = 'var(--danger)';
+                    valid = false;
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+            
+            if (!valid) {
+                SPMB.toast('Lengkapi data yang wajib diisi', 'error');
+            }
+            
+            return valid;
+        }
+        
+        // Form Submission
+        document.getElementById('pendaftaranForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!document.getElementById('setuju').checked) {
+                SPMB.toast('Anda harus menyetujui pernyataan', 'error');
+                return;
+            }
+            
+            // Generate nomor pendaftaran
+            const noDaftar = SPMB.generateNoDaftar();
+            
+            // Simpan data (simulasi)
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            data.noDaftar = noDaftar;
+            data.tanggalDaftar = new Date().toISOString();
+            data.status = 'Menunggu Verifikasi';
+            
+            // Simpan ke localStorage (untuk demo)
+            let pendaftar = JSON.parse(localStorage.getItem('spmb_pendaftar') || '[]');
+            pendaftar.push(data);
+            localStorage.setItem('spmb_pendaftar', JSON.stringify(pendaftar));
+            
+            // Redirect ke halaman sukses
+            SPMB.storage.set('pendaftarTerakhir', data);
+            window.location.href = 'sukses.html?no=' + noDaftar;
+        });
+        
+        // Load sekolah data
+        const sekolahData = [
+            { id: 1, nama: 'SD Negeri 1 Jakarta', jenjang: 'SD' },
+            { id: 2, nama: 'SD Negeri 2 Jakarta', jenjang: 'SD' },
+            { id: 3, nama: 'SMP Negeri 1 Jakarta', jenjang: 'SMP' },
+            { id: 4, nama: 'SMP Negeri 2 Jakarta', jenjang: 'SMP' },
+            { id: 5, nama: 'SMA Negeri 1 Jakarta', jenjang: 'SMA' },
+            { id: 6, nama: 'SMA Negeri 2 Jakarta', jenjang: 'SMA' }
+        ];
+        
+        function populateSekolah(jenjang) {
+            const select1 = document.getElementById('sekolahPilihan1');
+            const select2 = document.getElementById('sekolahPilihan2');
+            
+            const filtered = sekolahData.filter(s => s.jenjang === jenjang);
+            
+            const options = filtered.map(s => `<option value="${s.id}">${s.nama}</option>`).join('');
+            
+            select1.innerHTML = '<option value="">Pilih Sekolah</option>' + options;
+            select2.innerHTML = '<option value="">Pilih Sekolah</option>' + options;
+        }
+        
+        document.getElementById('jenjang').addEventListener('change', (e) => {
+            populateSekolah(e.target.value);
+        });
+        
+        // File upload preview
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const uploadDiv = e.target.parentElement;
+                    uploadDiv.style.borderColor = 'var(--success)';
+                    uploadDiv.innerHTML = `
+                        <div style="color: var(--success); font-size: 2rem;">✓</div>
+                        <p>${file.name}</p>
+                        <small>${(file.size / 1024 / 1024).toFixed(2)} MB</small>
+                    `;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
