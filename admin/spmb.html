@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPMB 2026/2027 - Admin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<style>
+.main-content {
+  margin-left: 260px;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.top-section {
+  margin-bottom: 24px;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-submitted { background: #E5E7EB; }
+.status-verified { background: #D1FAE5; color: #065F46; }
+.status-accepted { background: var(--emerald); color: #fff; }
+.status-rejected { background: #FECACA; color: #7F1D1D; }
+
+.table-actions button {
+  margin-right: 6px;
+}
+
+@media (max-width: 992px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <h3>Madrasah</h3>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="siswa.html">Data Siswa</a>
+  <a href="guru.html">Data Guru</a>
+  <a href="spmb.html" class="active">SPMB 2026/2027</a>
+  <a href="artikel.html">Artikel</a>
+  <a href="galeri.html">Galeri</a>
+  <a href="users.html">User & Role</a>
+  <a href="settings.html">Pengaturan</a>
+  <a href="#">Logout</a>
+</div>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <button class="btn btn-outline" onclick="toggleSidebar()">☰</button>
+  <strong>SPMB 2026/2027</strong>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    Dashboard / SPMB / Data Pendaftar
+  </div>
+
+  <!-- Header -->
+  <div class="top-section">
+    <h1>Data Pendaftar SPMB</h1>
+    <p>Sistem Penerimaan Murid Baru Tahun Ajaran 2026/2027</p>
+  </div>
+
+  <!-- Action Bar -->
+  <div class="action-bar">
+    
+    <div class="filter-group">
+      <input type="text" placeholder="Cari Nama / NISN">
+      
+      <select>
+        <option value="">Semua Status</option>
+        <option>Submitted</option>
+        <option>Verified</option>
+        <option>Accepted</option>
+        <option>Rejected</option>
+      </select>
+    </div>
+
+    <div>
+      <button class="btn btn-primary">Export Excel</button>
+      <button class="btn btn-gold">Tambah Manual</button>
+    </div>
+
+  </div>
+
+  <!-- Table -->
+  <div class="card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>NISN</th>
+          <th>Nama</th>
+          <th>Asal Sekolah</th>
+          <th>No HP</th>
+          <th>Status</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1234567890</td>
+          <td>Ahmad Fauzan</td>
+          <td>SDN 01 Jakarta</td>
+          <td>08123456789</td>
+          <td><span class="status-badge status-submitted">Submitted</span></td>
+          <td class="table-actions">
+            <button class="btn btn-outline">Detail</button>
+            <button class="btn btn-primary">Verifikasi</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>0987654321</td>
+          <td>Siti Aisyah</td>
+          <td>SDIT Al Falah</td>
+          <td>08234567890</td>
+          <td><span class="status-badge status-accepted">Accepted</span></td>
+          <td class="table-actions">
+            <button class="btn btn-outline">Detail</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  © 2026 Portal Madrasah - SPMB 2026/2027
+</div>
+
+<script>
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>
