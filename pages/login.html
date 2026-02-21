@@ -4,334 +4,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SPMB 2026-2027</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        .login-page {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 2rem;
-        }
-        
-        .login-container {
-            background: white;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-xl);
-            width: 100%;
-            max-width: 420px;
-            overflow: hidden;
-        }
-        
-        .login-header {
-            background: var(--gray-900);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-        
-        .login-header h1 {
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .login-header p {
-            color: var(--gray-400);
-            font-size: 0.875rem;
-        }
-        
-        .login-body {
-            padding: 2rem;
-        }
-        
-        .login-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            background: var(--gray-100);
-            padding: 0.25rem;
-            border-radius: var(--radius);
-        }
-        
-        .login-tab {
-            flex: 1;
-            padding: 0.625rem;
-            border: none;
-            background: transparent;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--gray-600);
-            transition: all 0.2s;
-        }
-        
-        .login-tab.active {
-            background: white;
-            color: var(--primary);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .login-form {
-            display: none;
-        }
-        
-        .login-form.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            font-size: 0.875rem;
-            color: var(--gray-700);
-        }
-        
-        .input-group {
-            position: relative;
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.5rem;
-            border: 2px solid var(--gray-200);
-            border-radius: var(--radius);
-            font-size: 0.875rem;
-            transition: all 0.2s;
-        }
-        
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-        
-        .input-icon {
-            position: absolute;
-            left: 0.875rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray-400);
-        }
-        
-        .toggle-password {
-            position: absolute;
-            right: 0.875rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--gray-400);
-        }
-        
-        .btn-login {
-            width: 100%;
-            padding: 0.875rem;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-        }
-        
-        .login-footer {
-            text-align: center;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--gray-200);
-        }
-        
-        .login-footer a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        
-        .login-footer a:hover {
-            text-decoration: underline;
-        }
-        
-        .alert {
-            padding: 0.875rem 1rem;
-            border-radius: var(--radius);
-            margin-bottom: 1rem;
-            display: none;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-        }
-        
-        .alert-error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-        
-        .alert-success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-        
-        .alert.show {
-            display: flex;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/auth.css">
 </head>
-<body>
-    <div class="login-page">
-        <div class="login-container">
-            <div class="login-header">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
+<body class="auth-page">
+    <!-- Background Elements -->
+    <div class="auth-bg">
+        <div class="auth-shape auth-shape-1"></div>
+        <div class="auth-shape auth-shape-2"></div>
+        <div class="auth-shape auth-shape-3"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="auth-container">
+        <!-- Left Side - Branding -->
+        <div class="auth-branding">
+            <div class="auth-branding-content">
+                <div class="auth-logo-large">🎓</div>
                 <h1>SPMB 2026-2027</h1>
                 <p>Sistem Penerimaan Murid Baru</p>
-            </div>
-            
-            <div class="login-body">
-                <div class="login-tabs">
-                    <button class="login-tab active" onclick="switchTab('siswa')">Calon Siswa</button>
-                    <button class="login-tab" onclick="switchTab('admin')">Admin/Operator</button>
+                <div class="auth-features">
+                    <div class="auth-feature">
+                        <span>✓</span>
+                        <span>Pendaftaran Online</span>
+                    </div>
+                    <div class="auth-feature">
+                        <span>✓</span>
+                        <span>Transparan & Akuntabel</span>
+                    </div>
+                    <div class="auth-feature">
+                        <span>✓</span>
+                        <span>Real-time Update</span>
+                    </div>
                 </div>
-                
-                <div id="alertBox" class="alert"></div>
-                
+            </div>
+        </div>
+
+        <!-- Right Side - Form -->
+        <div class="auth-form-wrapper">
+            <div class="auth-card">
+                <!-- Tabs -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="siswa">
+                        <span class="tab-icon">👨‍🎓</span>
+                        <span class="tab-text">Calon Siswa</span>
+                    </button>
+                    <button class="auth-tab" data-tab="admin">
+                        <span class="tab-icon">👨‍💼</span>
+                        <span class="tab-text">Admin</span>
+                    </button>
+                </div>
+
+                <!-- Alert -->
+                <div class="auth-alert" id="authAlert">
+                    <span class="alert-icon">⚠️</span>
+                    <span class="alert-message" id="alertMessage"></span>
+                </div>
+
                 <!-- Form Siswa -->
-                <form id="formSiswa" class="login-form active" onsubmit="handleLoginSiswa(event)">
+                <form class="auth-form active" id="formSiswa" onsubmit="handleSiswaLogin(event)">
+                    <div class="form-header">
+                        <h2>Selamat Datang</h2>
+                        <p>Masukkan nomor pendaftaran dan NIK Anda</p>
+                    </div>
+
                     <div class="form-group">
-                        <label>Nomor Pendaftaran</label>
-                        <div class="input-group">
+                        <label class="form-label">Nomor Pendaftaran</label>
+                        <div class="input-wrapper">
                             <span class="input-icon">📝</span>
-                            <input type="text" id="noDaftarSiswa" placeholder="Contoh: SPMB261234" required>
+                            <input 
+                                type="text" 
+                                class="form-input" 
+                                id="noDaftar" 
+                                placeholder="Contoh: SPMB261234"
+                                autocomplete="off"
+                                required
+                            >
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label>NIK</label>
-                        <div class="input-group">
+                        <label class="form-label">NIK (16 digit)</label>
+                        <div class="input-wrapper">
                             <span class="input-icon">🆔</span>
-                            <input type="password" id="nikSiswa" placeholder="16 digit NIK" maxlength="16" required>
-                            <button type="button" class="toggle-password" onclick="togglePassword('nikSiswa')">👁️</button>
+                            <input 
+                                type="password" 
+                                class="form-input" 
+                                id="nik" 
+                                placeholder="Masukkan NIK sesuai KK"
+                                maxlength="16"
+                                required
+                            >
+                            <button type="button" class="toggle-password" onclick="togglePassword('nik')">
+                                <span class="eye-icon">👁️</span>
+                            </button>
                         </div>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-login">Masuk</button>
-                    
-                    <div class="login-footer">
-                        <p>Belum mendaftar? <a href="siswa/daftar.html">Daftar Sekarang</a></p>
+
+                    <div class="form-options">
+                        <label class="checkbox-wrapper">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            <span>Ingat saya</span>
+                        </label>
+                        <a href="#" class="forgot-link">Lupa NIK?</a>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="btnSiswa">
+                        <span class="btn-text">Masuk ke Dashboard</span>
+                        <span class="btn-loader"></span>
+                    </button>
+
+                    <div class="form-footer">
+                        <p>Belum mendaftar? <a href="siswa/daftar.html" class="link-primary">Daftar Sekarang</a></p>
                     </div>
                 </form>
-                
+
                 <!-- Form Admin -->
-                <form id="formAdmin" class="login-form" onsubmit="handleLoginAdmin(event)">
+                <form class="auth-form" id="formAdmin" onsubmit="handleAdminLogin(event)">
+                    <div class="form-header">
+                        <h2>Admin Portal</h2>
+                        <p>Masukkan kredensial admin Anda</p>
+                    </div>
+
                     <div class="form-group">
-                        <label>Username</label>
-                        <div class="input-group">
-                            <span class="input-icon">👤</span>
-                            <input type="text" id="usernameAdmin" placeholder="Username" required>
+                        <label class="form-label">Email</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">📧</span>
+                            <input 
+                                type="email" 
+                                class="form-input" 
+                                id="email" 
+                                placeholder="admin@dikbud.go.id"
+                                required
+                            >
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label>Password</label>
-                        <div class="input-group">
+                        <label class="form-label">Password</label>
+                        <div class="input-wrapper">
                             <span class="input-icon">🔒</span>
-                            <input type="password" id="passwordAdmin" placeholder="Password" required>
-                            <button type="button" class="toggle-password" onclick="togglePassword('passwordAdmin')">👁️</button>
+                            <input 
+                                type="password" 
+                                class="form-input" 
+                                id="password" 
+                                placeholder="••••••••"
+                                required
+                            >
+                            <button type="button" class="toggle-password" onclick="togglePassword('password')">
+                                <span class="eye-icon">👁️</span>
+                            </button>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label>Sebagai</label>
-                        <div class="input-group">
+                        <label class="form-label">Login Sebagai</label>
+                        <div class="select-wrapper">
                             <span class="input-icon">🏫</span>
-                            <select id="roleAdmin" style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; border: 2px solid var(--gray-200); border-radius: var(--radius); font-size: 0.875rem;">
+                            <select class="form-select" id="roleType">
                                 <option value="admin">Admin Dinas</option>
                                 <option value="operator">Operator Sekolah</option>
                             </select>
+                            <span class="select-arrow">▼</span>
                         </div>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-login">Masuk</button>
-                    
-                    <div class="login-footer">
-                        <p><a href="#" onclick="showAlert('Hubungi admin untuk reset password', 'success')">Lupa Password?</a></p>
+
+                    <button type="submit" class="btn-submit btn-admin" id="btnAdmin">
+                        <span class="btn-text">Masuk ke Panel</span>
+                        <span class="btn-loader"></span>
+                    </button>
+
+                    <div class="form-footer">
+                        <a href="#" class="forgot-link">Lupa password?</a>
                     </div>
                 </form>
             </div>
+
+            <!-- Back to Home -->
+            <a href="../index.html" class="back-link">
+                <span>←</span>
+                <span>Kembali ke Beranda</span>
+            </a>
         </div>
     </div>
 
-    <script src="../assets/js/app.js"></script>
+    <!-- Scripts -->
     <script src="../assets/js/auth.js"></script>
-    <script>
-        function switchTab(tab) {
-            document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.login-form').forEach(f => f.classList.remove('active'));
-            
-            if (tab === 'siswa') {
-                document.querySelectorAll('.login-tab')[0].classList.add('active');
-                document.getElementById('formSiswa').classList.add('active');
-            } else {
-                document.querySelectorAll('.login-tab')[1].classList.add('active');
-                document.getElementById('formAdmin').classList.add('active');
-            }
-        }
-        
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            input.type = input.type === 'password' ? 'text' : 'password';
-        }
-        
-        function showAlert(message, type) {
-            const alert = document.getElementById('alertBox');
-            alert.className = `alert alert-${type} show`;
-            alert.textContent = message;
-            setTimeout(() => alert.classList.remove('show'), 5000);
-        }
-        
-        function handleLoginSiswa(e) {
-            e.preventDefault();
-            const noDaftar = document.getElementById('noDaftarSiswa').value;
-            const nik = document.getElementById('nikSiswa').value;
-            
-            const result = Auth.loginSiswa(noDaftar, nik);
-            
-            if (result.success) {
-                showAlert('Login berhasil! Mengalihkan...', 'success');
-                setTimeout(() => {
-                    window.location.href = 'siswa/status.html';
-                }, 1000);
-            } else {
-                showAlert(result.message, 'error');
-            }
-        }
-        
-        function handleLoginAdmin(e) {
-            e.preventDefault();
-            const username = document.getElementById('usernameAdmin').value;
-            const password = document.getElementById('passwordAdmin').value;
-            const role = document.getElementById('roleAdmin').value;
-            
-            const result = Auth.loginAdmin(username, password, role);
-            
-            if (result.success) {
-                showAlert('Login berhasil! Mengalihkan...', 'success');
-                setTimeout(() => {
-                    window.location.href = 'admin/dashboard.html';
-                }, 1000);
-            } else {
-                showAlert(result.message, 'error');
-            }
-        }
-    </script>
 </body>
 </html>
