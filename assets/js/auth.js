@@ -1,115 +1,143 @@
-// Sistem Autentikasi SPMB 2026-2027
+// SPMB 2026-2027 - Authentication JavaScript
 
-const Auth = {
-    // Data admin default (untuk demo)
-    admins: [
-        { username: 'admin', password: 'admin123', role: 'admin', nama: 'Admin Dinas' },
-        { username: 'operator1', password: 'op123', role: 'operator', nama: 'Operator SDN 1', sekolahId: 1 },
-        { username: 'operator2', password: 'op123', role: 'operator', nama: 'Operator SMPN 1', sekolahId: 3 }
-    ],
-    
-    // Login siswa dengan nomor pendaftaran dan NIK
-    loginSiswa: function(noDaftar, nik) {
-        const pendaftar = JSON.parse(localStorage.getItem('spmb_pendaftar') || '[]');
-        const siswa = pendaftar.find(p => p.noDaftar === noDaftar && p.nik === nik);
-        
-        if (!siswa) {
-            return { success: false, message: 'Nomor pendaftaran atau NIK tidak ditemukan' };
-        }
-        
-        // Set session
-        sessionStorage.setItem('spmb_user', JSON.stringify({
-            type: 'siswa',
-            noDaftar: siswa.noDaftar,
-            nama: siswa.namaLengkap,
-            data: siswa
-        }));
-        
-        return { success: true, data: siswa };
-    },
-    
-    // Login admin/operator
-    loginAdmin: function(username, password, role) {
-        const admin = this.admins.find(a => 
-            a.username === username && 
-            a.password === password && 
-            a.role === role
-        );
-        
-        if (!admin) {
-            return { success: false, message: 'Username atau password salah' };
-        }
-        
-        // Set session
-        sessionStorage.setItem('spmb_user', JSON.stringify({
-            type: 'admin',
-            username: admin.username,
-            nama: admin.nama,
-            role: admin.role,
-            sekolahId: admin.sekolahId || null
-        }));
-        
-        return { success: true, data: admin };
-    },
-    
-    // Cek status login
-    checkAuth: function(requiredType) {
-        const user = JSON.parse(sessionStorage.getItem('spmb_user'));
-        
-        if (!user) {
-            window.location.href = '/pages/login.html';
-            return false;
-        }
-        
-        if (requiredType && user.type !== requiredType) {
-            window.location.href = '/pages/login.html';
-            return false;
-        }
-        
-        return user;
-    },
-    
-    // Logout
-    logout: function() {
-        sessionStorage.removeItem('spmb_user');
-        window.location.href = '/index.html';
-    },
-    
-    // Get current user
-    getCurrentUser: function() {
-        return JSON.parse(sessionStorage.getItem('spmb_user'));
-    },
-    
-    // Update data siswa
-    updateSiswa: function(noDaftar, newData) {
-        let pendaftar = JSON.parse(localStorage.getItem('spmb_pendaftar') || '[]');
-        const index = pendaftar.findIndex(p => p.noDaftar === noDaftar);
-        
-        if (index !== -1) {
-            pendaftar[index] = { ...pendaftar[index], ...newData };
-            localStorage.setItem('spmb_pendaftar', JSON.stringify(pendaftar));
-            return true;
-        }
-        return false;
-    }
-};
+document.addEventListener('DOMContentLoaded', function() {
+    initTabs();
+    checkExistingSession();
+});
 
-// Proteksi halaman admin
-function protectAdminPage() {
-    const user = Auth.checkAuth('admin');
-    if (user) {
-        // Update UI dengan nama user
-        document.querySelectorAll('.user-name').forEach(el => {
-            el.textContent = user.nama;
+// ==================== TAB SWITCHING ====================
+
+function initTabs() {
+    const tabs = document.querySelectorAll('.auth-tab');
+    const forms = document.querySelectorAll('.auth-form');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.tab;
+            
+            // Update tabs
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            // Update forms
+            forms.forEach(f => f.classList.remove('active'));
+            document.getElementById(`form${target.charAt(0).toUpperCase() + target.slice(1)}`).classList.add('active');
+            
+            // Hide alert
+            hideAlert();
         });
-    }
+    });
 }
 
-// Proteksi halaman siswa
-function protectSiswaPage() {
-    const user = Auth.checkAuth('siswa');
-    if (user) {
-        return user.data;
+// ==================== FORM HANDLING ====================
+
+function handleSiswaLogin(e) {
+    e.preventDefault();
+    hideAlert();
+    
+    const btn = document.getElementById('btnSiswa');
+    const noDaftar = document.getElementById('noDaftar').value.trim();
+    const nik = document.getElementById('nik').value.trim();
+    
+    // Validation
+    if (!validateNoDaftar(noDaftar)) {
+        showAlert('Format nomor pendaftaran tidak valid (SPMB######)');
+        return;
     }
-    return null;
+    
+    if (!validateNIK(nik)) {
+        showAlert('NIK harus 16 digit angka');
+        return;
+    }
+    
+    // Loading state
+    setLoading(btn, true);
+    
+    // Simulate API call
+    setTimeout(() => {
+        setLoading(btn, false);
+        
+        // Success - redirect to dashboard
+        // In production: validate with Firebase
+        localStorage.setItem('spmb_user', JSON.stringify({
+            type: 'siswa',
+            noDaftar: noDaftar,
+            nama: 'Budi Santoso'
+        }));
+        
+        window.location.href = 'siswa/dashboard.html';
+    }, 1500);
+}
+
+function handleAdminLogin(e) {
+    e.preventDefault();
+    hideAlert();
+    
+    const btn = document.getElementById('btnAdmin');
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const role = document.getElementById('roleType').value;
+    
+    if (!email || !password) {
+        showAlert('Email dan password wajib diisi');
+        return;
+    }
+    
+    setLoading(btn, true);
+    
+    setTimeout(() => {
+        setLoading(btn, false);
+        
+        localStorage.setItem('spmb_user', JSON.stringify({
+            type: role,
+            email: email,
+            nama: role === 'admin' ? 'Admin Dinas' : 'Operator Sekolah'
+        }));
+        
+        window.location.href = '../admin/dashboard.html';
+    }, 1500);
+}
+
+// ==================== UTILITIES ====================
+
+function togglePassword(inputId) {
+    const input = document.getElementById(inputId);
+    const type = input.type === 'password' ? 'text' : 'password';
+    input.type = type;
+}
+
+function showAlert(message) {
+    const alert = document.getElementById('authAlert');
+    const msg = document.getElementById('alertMessage');
+    msg.textContent = message;
+    alert.classList.add('show');
+}
+
+function hideAlert() {
+    document.getElementById('authAlert').classList.remove('show');
+}
+
+function setLoading(btn, loading) {
+    btn.disabled = loading;
+    btn.classList.toggle('loading', loading);
+}
+
+function validateNoDaftar(noDaftar) {
+    return /^SPMB\d{6}$/i.test(noDaftar);
+}
+
+function validateNIK(nik) {
+    return /^\d{16}$/.test(nik);
+}
+
+function checkExistingSession() {
+    const user = localStorage.getItem('spmb_user');
+    if (user) {
+        const data = JSON.parse(user);
+        if (data.type === 'siswa') {
+            window.location.href = 'siswa/dashboard.html';
+        } else {
+            window.location.href = '../admin/dashboard.html';
+        }
+    }
 }
