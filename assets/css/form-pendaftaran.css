@@ -1,0 +1,467 @@
+/* ============================================
+   SPMB 2026-2027 - Form Pendaftaran Styles
+   ============================================ */
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #3b82f6;
+    --primary-soft: #dbeafe;
+    
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+    
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--slate-800);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+/* ============================================
+   BACKGROUND
+   ============================================ */
+
+.form-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.form-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+}
+
+.form-shape-1 {
+    width: 500px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.3);
+    top: -200px;
+    right: -200px;
+}
+
+.form-shape-2 {
+    width: 400px;
+    height: 400px;
+    background: rgba(118, 75, 162, 0.5);
+    bottom: -150px;
+    left: -150px;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+.form-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--primary);
+    z-index: 100;
+}
+
+.form-nav .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.form-nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--slate-800);
+    text-decoration: none;
+}
+
+.form-nav-logo {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.form-nav-links a {
+    color: var(--slate-600);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+}
+
+.form-nav-links a:hover {
+    color: var(--primary);
+}
+
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+
+.form-main {
+    padding: 100px 20px 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   FORM CARD - UTAMA
+   ============================================ */
+
+.form-card {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+/* Header */
+.form-card-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.form-card-header h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.form-card-header p {
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   PROGRESS STEPS
+   ============================================ */
+
+.form-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 40px;
+    background: var(--slate-50);
+    border-bottom: 1px solid var(--slate-200);
+    gap: 8px;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: var(--slate-200);
+    color: var(--slate-500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    transition: all 0.3s;
+}
+
+.progress-step.active .step-number {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.progress-step.completed .step-number {
+    background: var(--success);
+    color: white;
+}
+
+.step-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--slate-500);
+    text-align: center;
+}
+
+.progress-step.active .step-label {
+    color: var(--primary);
+}
+
+.progress-line {
+    flex: 1;
+    height: 3px;
+    background: var(--slate-200);
+    max-width: 60px;
+    border-radius: 2px;
+    position: relative;
+}
+
+.progress-line::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: var(--success);
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+.progress-line.completed::after {
+    width: 100%;
+}
+
+/* ============================================
+   ALERT
+   ============================================ */
+
+.form-alert {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 40px 0;
+    padding: 16px;
+    background: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: 12px;
+    color: #991b1b;
+}
+
+.form-alert.show {
+    display: flex;
+}
+
+.alert-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   FORM STEPS
+   ============================================ */
+
+.form-steps {
+    padding: 40px;
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.step-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--slate-100);
+}
+
+.step-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--slate-800);
+    margin-bottom: 8px;
+}
+
+.step-header p {
+    color: var(--slate-500);
+}
+
+/* ============================================
+   FORM GROUPS & INPUTS - YANG PENTING!
+   ============================================ */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--slate-700);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.form-label.required::after {
+    content: '*';
+    color: var(--error);
+}
+
+/* INPUT BOX - KOTAK YANG JELAS */
+.input-box,
+.select-box,
+.textarea-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--slate-50);
+    border: 2px solid var(--slate-200);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.input-box:hover,
+.select-box:hover,
+.textarea-box:hover {
+    border-color: var(--slate-300);
+    background: white;
+}
+
+.input-box:focus-within,
+.select-box:focus-within,
+.textarea-box:focus-within {
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    font-size: 1.25rem;
+    color: var(--slate-400);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* INPUT FIELD */
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--slate-800);
+    font-family: inherit;
+    border-radius: 12px;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--slate-400);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+}
+
+/* TEXTAREA SPECIFIC */
+.textarea-box {
+    align-items: flex-start;
+}
+
+.textarea-box .input-icon {
+    top: 14px;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+    padding-top: 14px;
+}
+
+/* SELECT SPECIFIC */
+.select-box {
+    cursor: pointer;
+}
+
+.form-select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 48px;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 16px;
+    font-size: 0.75rem;
+    color: var(--slate-400);
+    pointer-events: none;
+}
+
+/* INPUT HINT */
+.input-hint {
+    font-size: 0.875rem;
+    color: var(--slate-
